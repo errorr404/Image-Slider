@@ -6,12 +6,13 @@ import ImageSlideShow from "./modules/ImageSlideShow";
 
 function App(props) {
   useEffect(() => {
+    // fetch the images api
     props.fetchImageData();
   }, []);
   const { images } = props;
   return (
     <div className="App">
-      <ImageSlideShow images={images} transitionDelay={2000}/>
+      <ImageSlideShow images={images} slideDelay={2000}/>
     </div>
   );
 }
