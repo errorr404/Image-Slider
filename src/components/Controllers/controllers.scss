@@ -1,0 +1,13 @@
+.iconContainer {
+  &__icon {
+    background-color: #605a5a;
+    border-radius: 0.4rem;
+    font-size: 2rem;
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    &:hover {
+      color: green;
+    }
+  }
+}
