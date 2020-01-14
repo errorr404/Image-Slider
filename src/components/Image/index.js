@@ -1,15 +1,27 @@
 import React from "react";
+import { connect } from "react-redux";
+import { setImageIsLoaded } from "../../actions/imageDataAction";
 import "./image.scss";
 import Controllers from "../Controllers";
 
 const Image = props => {
-  const { imgSrc } = props;
+  const { imgSrc, setImageIsLoaded, isInitialImageIsLoaded } = props;
+  const handleImageLoadStatus = () => setImageIsLoaded();
   return (
     <div className="imageContainer">
-      <Controllers />
-      <img className="imageContainer__image" src={imgSrc} alt="slideImage" />
-      <Controllers right />
+      {isInitialImageIsLoaded && <Controllers />}
+      <img
+        className="imageContainer__image"
+        src={imgSrc}
+        alt="slideImage"
+        onLoad={handleImageLoadStatus}
+      />
+      {isInitialImageIsLoaded && <Controllers right />}
     </div>
   );
 };
-export default Image;
+const mapStateToProps = state => {
+  const { isInitialImageIsLoaded } = state;
+  return { isInitialImageIsLoaded };
+};
+export default connect(mapStateToProps, { setImageIsLoaded })(Image);

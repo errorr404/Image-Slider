@@ -1,4 +1,4 @@
-// Image slideshow component 
+// Image slideshow component
 // props --> images --> [{url,title}], slideDelay --> timer for slider
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
@@ -11,7 +11,7 @@ import ImageTabs from "../../components/ImageTabs";
 import TabTitle from "../../components/TabTitle";
 
 const ImageSlideShow = props => {
-  const { images, currentIndex, slideDelay } = props;
+  const { images, currentIndex, slideDelay, isInitialImageIsLoaded } = props;
   useEffect(() => {
     props.addSliderImagesToStore(images);
   }, [props.images]);
@@ -23,13 +23,16 @@ const ImageSlideShow = props => {
       clearInterval(timeInterval);
     };
   }, []);
+  console.log("currentIndex-->", currentIndex, images);
   return (
     <>
       {images && images.length > 0 && (
         <div>
-          <TabTitle title={images[currentIndex].title} />
+          {isInitialImageIsLoaded && (
+            <TabTitle title={images[currentIndex].title} />
+          )}
           <Image imgSrc={images[currentIndex].url} />
-          <ImageTabs />
+          {isInitialImageIsLoaded && <ImageTabs />}
         </div>
       )}
     </>
@@ -37,8 +40,8 @@ const ImageSlideShow = props => {
 };
 
 const mapStateToProps = state => {
-  const { currentIndex } = state;
-  return { currentIndex };
+  const { currentIndex, isInitialImageIsLoaded } = state;
+  return { currentIndex,isInitialImageIsLoaded };
 };
 export default connect(mapStateToProps, {
   addSliderImagesToStore,

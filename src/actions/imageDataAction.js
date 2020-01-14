@@ -3,7 +3,8 @@ import { imageDataUrl } from "../apiUrl";
 import {
   ADD_IMAGE_DATA_TO_STORE,
   UPDATE_CURRENT_INDEX,
-  ADD_SLIDER_IMAGE_TO_STORE
+  ADD_SLIDER_IMAGE_TO_STORE,
+  SET_IMAGE_IS_LOADED
 } from "../constant";
 
 export const fetchImageData = () => {
@@ -44,3 +45,9 @@ export const updateCurrentIndex = idx => {
   };
   return action;
 };
+export const setImageIsLoaded = () =>{
+  const action = {
+    type:SET_IMAGE_IS_LOADED
+  }
+  return action;
+}

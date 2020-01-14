@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchImageData } from "./actions/imageDataAction";
 import "./App.css";
 import ImageSlideShow from "./modules/ImageSlideShow";
+import Loader from "./components/Loader";
 
 function App(props) {
   useEffect(() => {
@@ -12,7 +13,7 @@ function App(props) {
   const { images } = props;
   return (
     <div className="App">
-      <ImageSlideShow images={images} slideDelay={2000}/>
+   {images.length>0 ? <ImageSlideShow images={images} slideDelay={2000}/>: <Loader />}
     </div>
   );
 }
